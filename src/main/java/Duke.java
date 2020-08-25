@@ -7,6 +7,7 @@ public class Duke {
         }
         System.out.println("\t____________________________________________________________");
     }
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         Task[] list = new Task[100];
@@ -30,16 +31,18 @@ public class Duke {
                 printList(list, numItems);
                 continue;
             }
-            if(answer.indexOf("done") > -1){
+            if(answer.contains("done")){
                 answer = answer.trim();
                 String[] words = answer.split(" ");
                 if(words.length>1) {
-                    int valueMarkedDone = Integer.parseInt(words[1]);
-                    if(valueMarkedDone>0 && valueMarkedDone<=numItems) {
-                        list[valueMarkedDone - 1].markAsDone();
-                        totalTasksDone++;
+                    int valueToMarkDone = Integer.parseInt(words[1]);
+                    if(valueToMarkDone>0 && valueToMarkDone<=numItems) {
+                        if(!list[valueToMarkDone-1].isDone){
+                            totalTasksDone++;
+                        }
+                        list[valueToMarkDone - 1].markAsDone();
                         System.out.println("\tAwesome! I've marked this task as done:");
-                        System.out.println("\t["+list[valueMarkedDone - 1].getStatusIcon()+"] "+list[valueMarkedDone - 1].description);
+                        System.out.println("\t["+list[valueToMarkDone - 1].getStatusIcon()+"] "+list[valueToMarkDone - 1].description);
                         System.out.println("\tOnly "+(numItems-totalTasksDone)+" to go! ;)");
                     }
                     else{
