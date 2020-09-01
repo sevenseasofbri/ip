@@ -2,15 +2,24 @@ import java.util.Scanner;
 public class Duke {
     public static Task[] list = new Task[100];
     public static int numItems;
+    public static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
+    public static final String LINE_BREAK = "\t____________________________________________________________";
+    public static final String YOUR_LIST = "\t_______________________~Your List~__________________________";
     public enum TaskType{
         TODO, DEADLINE, EVENT
     }
+
     public static void printList(){
-        System.out.println("\t_______________________~Your List~__________________________");
+        System.out.println(YOUR_LIST);
         for(int i=0; i<numItems; i++){
             System.out.println("\t"+(i+1)+". "+ list[i]);
         }
-        System.out.println("\t____________________________________________________________");
+        System.out.println(LINE_BREAK);
     }
     public static void addToList(String answer, TaskType taskType){
         numItems++;
@@ -29,22 +38,19 @@ public class Duke {
             time = answer.substring(answer.indexOf("/at ")+3);
             list[numItems-1] = new Event(taskDescription, time);
         }
+        System.out.println(LINE_BREAK);
         System.out.println("\tAdded:" + list[numItems-1]);
         System.out.println("\tNow you have "+numItems+(numItems>1?" tasks":" task")+" in the list :D");
+        System.out.println(LINE_BREAK);
     }
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int totalTasksDone=0;
         String answer="";
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\tHello! I'm\n"+ logo);
+        System.out.println(LINE_BREAK);
+        System.out.println("\tHello! I'm\n"+ LOGO);
         System.out.println("\tWhat can I do for you?");
-        System.out.println("\t____________________________________________________________");
+        System.out.println(LINE_BREAK);
         while(true){
             answer = in.nextLine();
             if(answer.trim().equalsIgnoreCase("bye")){
@@ -79,9 +85,9 @@ public class Duke {
                addToList(task, taskType);
             }
         }
-        System.out.println("\t____________________________________________________________");
+        System.out.println(LINE_BREAK);
         System.out.println("\tFarewell. Until next time my dude.");
-        System.out.println("\t____________________________________________________________");
+        System.out.println(LINE_BREAK);
     }
 
     private static TaskType getTaskType(String answer) {
