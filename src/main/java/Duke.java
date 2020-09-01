@@ -1,17 +1,40 @@
-import java.util.*;
+import java.util.Scanner;
 public class Duke {
-    public static void printList(Task[] items, int numItems){
+    public static Task[] list = new Task[100];
+    public static int numItems;
+    public enum TaskType{
+        TODO, DEADLINE, EVENT
+    }
+    public static void printList(){
         System.out.println("\t_______________________~Your List~__________________________");
         for(int i=0; i<numItems; i++){
-            System.out.println("\t"+(i+1)+". ["+items[i].getStatusIcon()+"] "+items[i].description);
+            System.out.println("\t"+(i+1)+". "+ list[i]);
         }
         System.out.println("\t____________________________________________________________");
     }
-
+    public static void addToList(String answer, TaskType taskType){
+        numItems++;
+        String taskDescription, time;
+        switch (taskType){
+        case TODO:
+            list[numItems-1] = new ToDo(answer);
+            break;
+        case DEADLINE:
+            taskDescription = answer.substring(0, answer.indexOf("/by"));
+            time = answer.substring(answer.indexOf("/by ")+3);
+            list[numItems-1] = new Deadline(taskDescription,time);
+            break;
+        case EVENT:
+            taskDescription = answer.substring(0, answer.indexOf("/at"));
+            time = answer.substring(answer.indexOf("/at ")+3);
+            list[numItems-1] = new Event(taskDescription, time);
+        }
+        System.out.println("\tAdded:" + list[numItems-1]);
+        System.out.println("\tNow you have "+numItems+(numItems>1?" tasks":" task")+" in the list :D");
+    }
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Task[] list = new Task[100];
-        int numItems =0, totalTasksDone=0;
+        int totalTasksDone=0;
         String answer="";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -28,7 +51,7 @@ public class Duke {
                 break;
             }
             if(answer.trim().equalsIgnoreCase("list")){
-                printList(list, numItems);
+                printList();
                 continue;
             }
             if(answer.contains("done")){
@@ -42,7 +65,7 @@ public class Duke {
                         }
                         list[valueToMarkDone - 1].markAsDone();
                         System.out.println("\tAwesome! I've marked this task as done:");
-                        System.out.println("\t["+list[valueToMarkDone - 1].getStatusIcon()+"] "+list[valueToMarkDone - 1].description);
+                        System.out.println("\t["+list[valueToMarkDone - 1]);
                         System.out.println("\tOnly "+(numItems-totalTasksDone)+" to go! ;)");
                     }
                     else{
@@ -51,14 +74,27 @@ public class Duke {
                 }
             }
             else {
-                Task newTask = new Task(answer);
-                list[numItems] = newTask;
-                numItems++;
-                System.out.println("\tAdded:" + answer);
+               String task = answer.substring(answer.trim().indexOf(" "));
+               TaskType taskType = getTaskType(answer);
+               addToList(task, taskType);
             }
         }
         System.out.println("\t____________________________________________________________");
         System.out.println("\tFarewell. Until next time my dude.");
         System.out.println("\t____________________________________________________________");
+    }
+
+    private static TaskType getTaskType(String answer) {
+        TaskType taskType;
+        if(answer.contains("deadline")){
+            taskType = TaskType.DEADLINE;
+        }
+        else if(answer.contains("event")){
+            taskType = TaskType.EVENT;
+        }
+        else{
+            taskType = TaskType.TODO;
+        }
+        return taskType;
     }
 }
