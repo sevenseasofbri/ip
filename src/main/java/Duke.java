@@ -20,7 +20,7 @@ public class Duke {
         boolean isNotDone=true;
         String answer;
         //printWelcomeMessage();
-        printMessage("\tHello! I'm\n"+ LOGO+"\n\tWhat can I do for you?");
+        printMessage("\tHello! I'm\n"+ LOGO+"\n\tWhat can I do for you?\uD83D\uDE0A");
         while(isNotDone){
             answer = in.nextLine();
             try {
@@ -28,25 +28,16 @@ public class Duke {
             }catch (DukeException e){
                 printMessage("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }catch (ArrayIndexOutOfBoundsException e){
-                printMessage("\tEmpty command! Please specify the task number to mark as complete.");
+                printMessage("\t☹ Empty command! Please specify the task number to mark as complete.");
             }catch (NumberFormatException e){
-                printMessage("\tSorry could not mark as done! Please enter a valid number.");
+                printMessage("\t☹ Sorry could not mark as done! Please enter a valid number.");
             }catch (DukeOutOfBoundsException e){
-                printMessage("\tCannot mark task as done! :(\n\tPlease enter a list number within the range.");
+                printMessage("\t☹ Cannot mark task as done! :(\n\tPlease enter a list number within the range.");
             }
         }
         printMessage("\tFarewell. Until next time my dude.");
-//        System.out.println(LINE_BREAK);
-//        System.out.println("\tFarewell. Until next time my dude.");
-//        System.out.println(LINE_BREAK);
     }
 
-//    private static void printWelcomeMessage() {
-//        System.out.println(LINE_BREAK);
-//        System.out.println("\tHello! I'm\n"+ LOGO);
-//        System.out.println("\tWhat can I do for you?");
-//        System.out.println(LINE_BREAK);
-//    }
     public static void printList(){
         System.out.println(YOUR_LIST);
         for(int i=0; i<numItems; i++){
@@ -54,6 +45,7 @@ public class Duke {
         }
         System.out.println(LINE_BREAK);
     }
+
     private static void printMessage(String message){
         System.out.println(LINE_BREAK);
         System.out.println(message);
@@ -61,11 +53,12 @@ public class Duke {
     }
     private static TaskType getTaskType(String answer) {
         TaskType taskType;
-        if(answer.contains("deadline")){
+        answer = answer.trim();
+        if(answer.matches("deadline(.*)")){
             taskType = TaskType.DEADLINE;
-        } else if(answer.contains("event")){
+        } else if(answer.matches("event(.*)")){
             taskType = TaskType.EVENT;
-        } else if(answer.contains("todo")){
+        } else if(answer.matches("todo(.*)")){
             taskType = TaskType.TODO;
         } else{
             taskType = TaskType.INVALID;
@@ -91,10 +84,9 @@ public class Duke {
                         totalTasksDone++;
                 }
                 list[valueToMarkDone - 1].markAsDone();
-                System.out.println("\tAwesome! I've marked this task as done:");
-                System.out.println("\t[" + list[valueToMarkDone - 1]);
-                System.out.println("\tOnly " + (numItems - totalTasksDone) + " to go! ;)");
-                return true;
+                printMessage("\tAwesome! I've marked this task as done:"+"\n\t" +
+                         list[valueToMarkDone - 1]+
+                        "\n\tOnly " + (numItems - totalTasksDone) + " to go! ;)");
         }
         else {
             TaskType taskType = getTaskType(answer);
@@ -104,15 +96,23 @@ public class Duke {
             try {
                 addToList(answer, taskType);
             }catch(EmptyTaskException e){
-                printMessage("☹ OOPS!!! The description of a"+
+                printMessage("☹ OOPS!!! The description of a "+
                         (taskType==TaskType.TODO?"todo":(taskType==TaskType.DEADLINE?"deadline":"event"))+
-                        "cannot be empty.");
+                        " cannot be empty.");
+            }catch(StringIndexOutOfBoundsException e){
+                printMessage("\t☹ Please start with the command with todo/deadline/event!"+
+                        "\n\t OR please specify a date/time if you want to set a deadline/event!");
+            }catch (InvalidFormatException e){
+                printMessage("\t☹ Remember to format your command like this ⬇" +
+                        "\n\t todo <description>"+
+                        "\n\t deadline <description> /by <date/time>"+
+                        "\n\t event <description> /at <date/time>");
             }
-            return true;
         }
+        return true;
     }
 
-    public static void addToList(String answer, TaskType taskType) throws EmptyTaskException{
+    public static void addToList(String answer, TaskType taskType) throws EmptyTaskException, InvalidFormatException{
         String[] words = answer.trim().split(" ");
         //Checks if task description is empty
         if(words.length<2){
@@ -126,18 +126,21 @@ public class Duke {
             list[numItems-1] = new ToDo(answer);
             break;
         case DEADLINE:
+            if(!answer.contains(" /by ")){
+                throw new InvalidFormatException();
+            }
             taskDescription = answer.substring(0, answer.indexOf("/by"));
             time = answer.substring(answer.indexOf("/by ")+3);
             list[numItems-1] = new Deadline(taskDescription,time);
             break;
         case EVENT:
+            if(!answer.contains(" /at ")){
+                throw new InvalidFormatException();
+            }
             taskDescription = answer.substring(0, answer.indexOf("/at"));
             time = answer.substring(answer.indexOf("/at ")+3);
             list[numItems-1] = new Event(taskDescription, time);
         }
-        System.out.println(LINE_BREAK);
-        System.out.println("\tAdded:" + list[numItems-1]);
-        System.out.println("\tNow you have "+numItems+(numItems>1?" tasks":" task")+" in the list :D");
-        System.out.println(LINE_BREAK);
+        printMessage("\tAdded:" + list[numItems-1]+"\n\tNow you have "+numItems+(numItems>1?" tasks":" task")+" in the list :D");
     }
 }
