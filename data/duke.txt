@@ -1,0 +1,3 @@
+D | 0 |  frog  |  7
+T | 0 |  goat
+E | 0 |  loll  |  6

@@ -1,6 +1,10 @@
 package duke;
 
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+
 public class Duke {
     public static Task[] list = new Task[100];
     public static int numItems;
@@ -23,6 +27,7 @@ public class Duke {
         String answer;
         //printWelcomeMessage();
         printMessage("\tHello! I'm\n"+ LOGO+"\n\tWhat can I do for you?\uD83D\uDE0A");
+        Save file = new Save("duke.txt", "data" );
         while(isNotDone){
             answer = in.nextLine();
             try {
@@ -36,6 +41,11 @@ public class Duke {
             }catch (DukeOutOfBoundsException e){
                 printMessage("\t☹ Cannot mark task as done! :(\n\tPlease enter a list number within the range.");
             }
+        }
+        try {
+            file.updateFile(list, numItems);
+        }catch(IOException e){
+            printMessage("\tSomething went wrong while loading file: "+ e.getMessage());
         }
         printMessage("\tFarewell. Until next time my dude.");
     }
