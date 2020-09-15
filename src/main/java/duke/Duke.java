@@ -1,4 +1,5 @@
 package duke;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,8 +23,13 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         boolean isNotDone=true;
         String answer;
-        printMessage("\tHello! I'm\n"+ LOGO+"\n\tWhat can I do for you?\uD83D\uDE0A");
         Save file = new Save("duke.txt", "data" );
+        printMessage("\tHello! I'm\n"+ LOGO+"\n\tWhat can I do for you?\uD83D\uDE0A");
+        try{
+            tasks = file.readFile();
+        }catch(FileNotFoundException e){
+            printMessage("\t☹ Could not load the previous data!Because "+e.getMessage());
+        }
         while(isNotDone){
             answer = in.nextLine();
             try {

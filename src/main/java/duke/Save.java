@@ -72,7 +72,8 @@ public class Save {
         }
     }
 
-    public void readFile(ArrayList<Task> tasks) throws FileNotFoundException {
+    public ArrayList<Task> readFile() throws FileNotFoundException {
+        ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(file);
         int numTask = 0;
         while (sc.hasNext()) {
@@ -93,5 +94,6 @@ public class Save {
             }
             numTask++;
         }
+        return tasks;
     }
 }
