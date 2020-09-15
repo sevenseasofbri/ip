@@ -22,7 +22,6 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         boolean isNotDone=true;
         String answer;
-        //printWelcomeMessage();
         printMessage("\tHello! I'm\n"+ LOGO+"\n\tWhat can I do for you?\uD83D\uDE0A");
         while(isNotDone){
             answer = in.nextLine();
@@ -31,11 +30,11 @@ public class Duke {
             }catch (DukeException e){
                 printMessage("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }catch (ArrayIndexOutOfBoundsException e){
-                printMessage("\t☹ Empty command! Please specify the task number to mark as complete.");
+                printMessage("\t☹ Empty command! Please specify the task number to mark as complete/delete.");
             }catch (NumberFormatException e){
-                printMessage("\t☹ Sorry could not mark as done! Please enter a valid number.");
+                printMessage("\t☹ Sorry could not mark as done/deleted! Please enter a valid number.");
             }catch (DukeOutOfBoundsException e){
-                printMessage("\t☹ Cannot mark task as done! :(\n\tPlease enter a list number within the range.");
+                printMessage("\t☹ Cannot mark task as done/deleted! :(\n\tPlease enter a list number within the range.");
             }
         }
         printMessage("\tFarewell. Until next time my dude.");
@@ -79,8 +78,10 @@ public class Duke {
             printList();
             return true;
         }
-        if(answer.contains("done")){
+        if(answer.trim().matches("done(.*)")){
             markTaskAsDone(answer);
+        }else if(answer.trim().matches("delete(.*)")){
+            deleteTask(answer);
         } else {
             TaskType taskType = getTaskType(answer);
             if(taskType == TaskType.INVALID){
@@ -118,6 +119,21 @@ public class Duke {
         printMessage("\tAwesome! I've marked this task as done:"+"\n\t" +
                  tasks.get(valueToMarkDone-1)+
                 "\n\tOnly " + (tasks.size() - totalTasksDone) + " to go! ;)");
+    }
+
+    private static void deleteTask(String answer) throws DukeOutOfBoundsException {
+        String[] words = answer.trim().split(" ");
+        int valueToDelete = Integer.parseInt(words[1]);
+        if(valueToDelete<=0 || valueToDelete>tasks.size()) {
+            throw new DukeOutOfBoundsException();
+        }
+        if (tasks.get(valueToDelete-1).isDone) {
+            totalTasksDone--;
+        }
+        printMessage("\tNoted! I've removed this task: \n\t" +
+                tasks.get(valueToDelete-1)+
+                "\n\tNow you have " +(tasks.size()-1)+" tasks in the list.");
+        tasks.remove(valueToDelete-1);
     }
 
     public static void addToList(String answer, TaskType taskType) throws EmptyTaskException, InvalidFormatException{
