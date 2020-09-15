@@ -1,9 +1,10 @@
 package duke;
-
 import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Duke {
-    public static Task[] list = new Task[100];
-    public static int numItems;
+    //public static Task[] list = new Task[100];
+    public static ArrayList<Task> tasks = new ArrayList<>();
     public static int totalTasksDone=0;
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -42,8 +43,10 @@ public class Duke {
 
     public static void printList(){
         System.out.println(YOUR_LIST);
-        for(int i=0; i<numItems; i++){
-            System.out.println("\t"+(i+1)+". "+ list[i]);
+        int index =0;
+        for(Task task: tasks){
+            System.out.println("\t"+(index+1)+". "+ task);
+            index++;
         }
         System.out.println(LINE_BREAK);
     }
@@ -77,20 +80,8 @@ public class Duke {
             return true;
         }
         if(answer.contains("done")){
-            String[] words = answer.trim().split(" ");
-            int valueToMarkDone = Integer.parseInt(words[1]);
-            if(valueToMarkDone<=0 || valueToMarkDone>numItems) {
-                throw new DukeOutOfBoundsException();
-            }
-                if (!list[valueToMarkDone - 1].isDone) {
-                        totalTasksDone++;
-                }
-                list[valueToMarkDone - 1].markAsDone();
-                printMessage("\tAwesome! I've marked this task as done:"+"\n\t" +
-                         list[valueToMarkDone - 1]+
-                        "\n\tOnly " + (numItems - totalTasksDone) + " to go! ;)");
-        }
-        else {
+            markTaskAsDone(answer);
+        } else {
             TaskType taskType = getTaskType(answer);
             if(taskType == TaskType.INVALID){
                 throw new DukeException();
@@ -98,7 +89,7 @@ public class Duke {
             try {
                 addToList(answer, taskType);
             }catch(EmptyTaskException e){
-                printMessage("☹ OOPS!!! The description of a "+
+                printMessage("\t☹ OOPS!!! The description of a "+
                         (taskType==TaskType.TODO?"todo":(taskType==TaskType.DEADLINE?"deadline":"event"))+
                         " cannot be empty.");
             }catch(StringIndexOutOfBoundsException e){
@@ -114,6 +105,21 @@ public class Duke {
         return true;
     }
 
+    private static void markTaskAsDone(String answer) throws DukeOutOfBoundsException {
+        String[] words = answer.trim().split(" ");
+        int valueToMarkDone = Integer.parseInt(words[1]);
+        if(valueToMarkDone<=0 || valueToMarkDone>tasks.size()) {
+            throw new DukeOutOfBoundsException();
+        }
+        if (!tasks.get(valueToMarkDone-1).isDone) {
+                totalTasksDone++;
+        }
+        tasks.get(valueToMarkDone-1).markAsDone();
+        printMessage("\tAwesome! I've marked this task as done:"+"\n\t" +
+                 tasks.get(valueToMarkDone-1)+
+                "\n\tOnly " + (tasks.size() - totalTasksDone) + " to go! ;)");
+    }
+
     public static void addToList(String answer, TaskType taskType) throws EmptyTaskException, InvalidFormatException{
         String[] words = answer.trim().split(" ");
         //Checks if task description is empty
@@ -122,10 +128,9 @@ public class Duke {
         }
         answer = answer.substring(answer.indexOf(" "));
         String taskDescription, time;
-        numItems++;
         switch (taskType){
         case TODO:
-            list[numItems-1] = new ToDo(answer);
+            tasks.add(new ToDo(answer));
             break;
         case DEADLINE:
             if(!answer.contains(" /by ")){
@@ -133,7 +138,7 @@ public class Duke {
             }
             taskDescription = answer.substring(0, answer.indexOf("/by"));
             time = answer.substring(answer.indexOf("/by ")+3);
-            list[numItems-1] = new Deadline(taskDescription,time);
+            tasks.add(new Deadline(taskDescription, time));
             break;
         case EVENT:
             if(!answer.contains(" /at ")){
@@ -141,8 +146,9 @@ public class Duke {
             }
             taskDescription = answer.substring(0, answer.indexOf("/at"));
             time = answer.substring(answer.indexOf("/at ")+3);
-            list[numItems-1] = new Event(taskDescription, time);
+            tasks.add(new Event(taskDescription, time));
         }
-        printMessage("\tAdded:" + list[numItems-1]+"\n\tNow you have "+numItems+(numItems>1?" tasks":" task")+" in the list :D");
+        printMessage("\tAdded:" + tasks.get(tasks.size()-1) +
+                "\n\tNow you have "+tasks.size()+(tasks.size()>1?" tasks":" task")+" in the list :D");
     }
 }
