@@ -1,9 +1,9 @@
 package duke;
 import java.util.Scanner;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Duke {
-    //public static Task[] list = new Task[100];
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static int totalTasksDone=0;
     public static final String LOGO = " ____        _        \n"
@@ -23,6 +23,7 @@ public class Duke {
         boolean isNotDone=true;
         String answer;
         printMessage("\tHello! I'm\n"+ LOGO+"\n\tWhat can I do for you?\uD83D\uDE0A");
+        Save file = new Save("duke.txt", "data" );
         while(isNotDone){
             answer = in.nextLine();
             try {
@@ -36,6 +37,11 @@ public class Duke {
             }catch (DukeOutOfBoundsException e){
                 printMessage("\t☹ Cannot mark task as done/deleted! :(\n\tPlease enter a list number within the range.");
             }
+        }
+        try {
+            file.updateFile(tasks);
+        }catch(IOException e){
+            printMessage("\tSomething went wrong while loading file: "+ e.getMessage());
         }
         printMessage("\tFarewell. Until next time my dude.");
     }
