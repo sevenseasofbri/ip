@@ -2,16 +2,16 @@ package duke;
 
 import duke.exception.DukeOutOfBoundsException;
 import duke.exception.EmptyTaskException;
+import duke.exception.FindFormatException;
 import duke.exception.InvalidFormatException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import java.util.ArrayList;
-import java.time.format.DateTimeParseException;
-import java.time.DateTimeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 
 public class TaskList {
@@ -91,5 +91,20 @@ public class TaskList {
     private String getFormattedTime(String extractedDate){
         LocalDate date = LocalDate.parse(extractedDate.trim());
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    public void findTasksWithKeyword(String answer) throws FindFormatException{
+        String[] words = answer.trim().split(" ");
+        if(words.length<2){
+            throw new FindFormatException();
+        }
+        String keyword = answer.trim().substring(answer.trim().indexOf(" "));
+        ArrayList<Task> tasksWithKeyword= new ArrayList<>();
+        for(Task task: tasks){
+            if(task.getDescription().matches("(.*)"+keyword.trim()+"(.*)")){
+                tasksWithKeyword.add(task);
+            }
+        }
+        ui.printList(tasksWithKeyword, true);
     }
 }

@@ -12,7 +12,7 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     public static final String LINE_BREAK = "\t____________________________________________________________";
     public static final String YOUR_LIST = "\t_______________________~Your List~__________________________";
-
+    public static final String TASKS_FOUND="\t______________________~Tasks Found~_________________________";
     public void printMessage(String message){
         System.out.println(LINE_BREAK);
         System.out.println(message);
@@ -31,8 +31,8 @@ public class Ui {
         printMessage("\tSomething went wrong while loading file: "+ e.getMessage());
     }
 
-    public void printList(ArrayList<Task> tasks){
-        System.out.println(YOUR_LIST);
+    public void printList(ArrayList<Task> tasks, boolean isForFind){
+        System.out.println(isForFind? TASKS_FOUND: YOUR_LIST);
         int index =0;
         for(Task task: tasks){
             System.out.println("\t"+(index+1)+". "+ task);
@@ -86,5 +86,9 @@ public class Ui {
     public void printAddedTask(ArrayList<Task> tasks) {
         printMessage("\tAdded:" + tasks.get(tasks.size()-1) +
                         "\n\tNow you have "+ tasks.size()+(tasks.size()!=1?" tasks":" task")+" in the list :D");
+    }
+
+    public void printFindFormatError() {
+        printMessage("\t☹ Please remember to specify a keyword to search for!");
     }
 }
