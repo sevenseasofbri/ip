@@ -5,6 +5,9 @@ import duke.exception.DukeOutOfBoundsException;
 import duke.exception.EmptyTaskException;
 import duke.exception.InvalidFormatException;
 
+import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
     private Ui ui;
     private TaskList taskList;
@@ -36,6 +39,10 @@ public class Parser {
             }catch(StringIndexOutOfBoundsException e){
                 ui.printOutOfBoundError();
             }catch (InvalidFormatException e){
+                ui.printFormatError();
+            }catch (DateTimeParseException e){
+                ui.printFormatError();
+            }catch (DateTimeException e){
                 ui.printFormatError();
             }
         }
