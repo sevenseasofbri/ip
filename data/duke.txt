@@ -1,2 +1,0 @@
-T | 0 |  Commit changes
-D | 0 |  Write post  |  7

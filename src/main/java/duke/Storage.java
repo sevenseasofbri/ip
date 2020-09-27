@@ -1,4 +1,9 @@
 package duke;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,12 +11,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Save {
+public class Storage {
     protected String fileName;
     protected String directory;
     protected File file;
 
-    public Save(String name, String dir){
+    public Storage(String name, String dir){
         fileName = name;
         directory = dir;
         createFile();
@@ -41,13 +46,13 @@ public class Save {
             done = getDoneStatus(task);
             switch (taskType){
             case "T":
-                textIn = textIn+ (taskType+" | "+done+" | "+task.description+System.lineSeparator());
+                textIn = textIn+ (taskType+" | "+done+" | "+task.getDescription()+System.lineSeparator());
                 break;
             case "D":
-                textIn = textIn + (taskType+" | "+done+" | "+task.description+" | "+((Deadline) task).getBy()+System.lineSeparator());
+                textIn = textIn + (taskType+" | "+done+" | "+task.getDescription()+" | "+((Deadline) task).getBy()+System.lineSeparator());
                 break;
             case "E":
-                textIn = textIn + (taskType+" | "+done+" | "+task.description+" | "+((Event) task).getAt()+System.lineSeparator());
+                textIn = textIn + (taskType+" | "+done+" | "+task.getDescription()+" | "+((Event) task).getAt()+System.lineSeparator());
             }
         }
         fw.write(textIn);
@@ -65,7 +70,7 @@ public class Save {
     }
 
     public String getDoneStatus(Task task){
-        if(task.isDone){
+        if(task.getDoneStatus()){
             return "1";
         }else{
             return "0";
