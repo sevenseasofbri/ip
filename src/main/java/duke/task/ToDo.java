@@ -6,7 +6,6 @@ package duke.task;
 public class ToDo extends Task{
     /**
      * Parameterised constructor to create an object with the description specified.
-     *
      * @param description
      */
     public ToDo(String description){
@@ -15,7 +14,6 @@ public class ToDo extends Task{
 
     /**
      * Specifies how the ToDo object type must be represented by a String.
-     *
      * @return String type representation of the ToDo object.
      */
     @Override

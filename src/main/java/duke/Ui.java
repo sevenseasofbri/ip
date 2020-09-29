@@ -45,6 +45,7 @@ public class Ui {
 
     /**
      * Prints the error that occurs when loading a file.
+     *
      * @param e An IOException type which is used to get error message.
      */
     void printFileError(IOException e) {
@@ -55,6 +56,7 @@ public class Ui {
     /**
      * Prints the ArrayList<Task> passed to it in a manner specific to Duke.
      * @param tasks An ArrayList<Task> to be printed.
+     * @param isForFind A boolean value that specifies if the print action is for the find command or not.
      */
     public void printList(ArrayList<Task> tasks, boolean isForFind){
         System.out.println(isForFind? TASKS_FOUND: YOUR_LIST);
@@ -96,7 +98,6 @@ public class Ui {
 
     /**
      * Prints the error caused by empty description when using task commands todo/deadline/event.
-     *
      * @param taskType A Duke.TaskType enum that specifies the type of task passed to be printed.
      */
     public void printEmptyDescriptionError(Duke.TaskType taskType) {
@@ -125,7 +126,6 @@ public class Ui {
 
     /**
      * Prints the task removed using the delete operation.
-     *
      * @param valueToDelete An int that specifies the task number to be deleted.
      * @param tasks The original ArrayList<Task> of tasks before the task specified is deleted.
      */
@@ -137,7 +137,6 @@ public class Ui {
 
     /**
      * Prints the task marked done as well as the number of tasks left to mark as done.
-     *
      * @param valueToMarkDone An int that specifies the task number to mark as done.
      * @param tasks An ArrayList<Task> of the tasks.
      * @param totalTasksDone An int that contains the total number of tasks done.
@@ -150,7 +149,6 @@ public class Ui {
 
     /**
      * Prints the most recent task added to the list.
-     *
      * @param tasks An ArrayList<Task> specifying the users current saved tasks.
      */
     public void printAddedTask(ArrayList<Task> tasks) {
@@ -158,6 +156,9 @@ public class Ui {
                         "\n\tNow you have "+ tasks.size()+(tasks.size()!=1?" tasks":" task")+" in the list :D");
     }
 
+    /**
+     * Prints error if the format of the find command is wrong.
+     */
     public void printFindFormatError() {
         printMessage("\t☹ Please remember to specify a keyword to search for!");
     }

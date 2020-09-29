@@ -21,7 +21,6 @@ public class Storage {
 
     /**
      * Parameterised constructor that takes in the filename and directory to create a new file.
-     *
      * @param name The name and extension type of the file where the task data will be stored.
      * @param dir The name of the folder in which the file with task data will be stored.
      */
@@ -53,7 +52,6 @@ public class Storage {
     /**
      * Updates the existing file created with the task list specified in the parameter. Writes to the file in
      * a specific format.
-     *
      * @param tasks An ArrayList<Task> which specifies the current tasks to be written to the file.
      * @throws IOException If the output operation to the file has failed or was interrupted.
      */
@@ -82,7 +80,6 @@ public class Storage {
 
     /**
      * Returns a string "T", "D" or "E" based on the type of task passed to the function.
-     *
      * @param task A Task class object which could be an object of subclass Deadline, Event or ToDo.
      * @return A String "T", "D" or "E" if the task is and instance of ToDo, Deadline or Event respectively.
      */
@@ -98,7 +95,6 @@ public class Storage {
 
     /**
      * Returns a String "0" or "1" based on whether the task passed is marked as done or not.
-     *
      * @param task An instance of the Task class.
      * @return A String "0" or "1" if the task is marked as not done or done respectively.
      */
@@ -113,7 +109,6 @@ public class Storage {
     /**
      * Returns an ArrayList<Task> of tasks after reading values from the current file. The data is read on
      * assumption that the format of data is same as the one specified by function updateFile().
-     *
      * @return An ArrayList<Task> with the tasks specified in the file.
      * @throws FileNotFoundException If the file does not exist or cannot be found.
      */

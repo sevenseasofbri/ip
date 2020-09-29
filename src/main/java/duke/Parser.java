@@ -16,7 +16,6 @@ public class Parser {
     /**
      *  Parameterised constructor that accepts new instance of the chat-bot Duke to store current taskList when
      *  creating a new object of Param. Also initialises the object of Ui to use for user interactions.
-     *
      * @param duke The new instance of the Duke class to store current updated taskList.
      */
     public Parser(Duke duke){
@@ -29,11 +28,11 @@ public class Parser {
      * commands given. If the command matches 'bye' then the function returns false and the while loop in the run()
      * function in the duke class is terminated, and the program exits. Otherwise, in the case of other commands,
      * the function performs a task and/or prints a response then returns true, to continue running the program.
-     *
      * @param answer The user response collected via the command line.
      * @return boolean This is false if 'bye' is read and true for all other commands read.
      * @throws DukeException If command type is INVALID.
      * @throws DukeOutOfBoundsException If an out of range number is specified to mark as done/ delete from the list.
+     * @throws FindFormatException If the format of the find command is incorrect.
      */
     boolean parseCommand(String answer) throws DukeException, DukeOutOfBoundsException, FindFormatException {
         if(answer.trim().equalsIgnoreCase("bye")){
@@ -71,7 +70,6 @@ public class Parser {
     /**
      * Returns type of task as an enum value specified in the Duke class. Reads response String passed by
      * parseCommand() and identifies type of task.
-     *
      * @param answer Response String from the parseCommand().
      * @return Duke.TaskType An enum with types DEADLINE, EVENT, TODO, INVALID based on type of task read.
      */

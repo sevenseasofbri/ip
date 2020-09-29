@@ -9,7 +9,6 @@ public class Task {
 
     /**
      * Parameterised constructor to accept and specify task description and set initial completion status.
-     *
      * @param description String type describing the task.
      */
     public Task(String description) {
@@ -19,7 +18,6 @@ public class Task {
 
     /**
      * Returns a tick or cross status icon based on completion status of the task.
-     *
      * @return String type tick or cross icon. If task is complete then tick else a cross.
      */
     public String getStatusIcon() {
@@ -36,7 +34,6 @@ public class Task {
 
     /**
      * A getter function that returns completion status of the task.
-     *
      * @return A boolean instance variable isDone.
      */
     public boolean getDoneStatus(){
@@ -45,7 +42,6 @@ public class Task {
 
     /**
      * A getter function that returns description of the task.
-     *
      * @return String type instance variable description.
      */
     public String getDescription(){

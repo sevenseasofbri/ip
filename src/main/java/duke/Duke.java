@@ -27,7 +27,6 @@ public class Duke {
      * at fileName and dir specified. Also tries to load data from specified file, in case the file cannot be read-
      * it catches FileNotFoundException and prints error message accordingly. Then proceeds to create a new empty
      * taskList.
-     *
      * @param fileName The name and extension of the file where task data will be stored.
      * @param dir The folder in which the task data file will be located.
      */
@@ -77,7 +76,6 @@ public class Duke {
     /**
      * Creates a new object of Duke and specifies storage file to be 'duke.txt' under the folder 'data.' Then
      * calls run() to launch the chat-bot assistant Duke.
-     *
      * @param args Array of strings taken in when the application is run on the OS with command line.
      */
     public static void main(String[] args) {

@@ -8,7 +8,6 @@ public class Deadline extends Task {
 
     /**
      * Parameterised constructor to create an object with description and by when the tasks must be completed.
-     *
      * @param description String type describing the task.
      * @param by String type specifying time/date by when the task must be complete.
      */
@@ -19,7 +18,6 @@ public class Deadline extends Task {
 
     /**
      * A getter function used to get instance variable 'by.'
-     *
      * @return String type instance variable by.
      */
     public String getBy(){
@@ -28,7 +26,6 @@ public class Deadline extends Task {
 
     /**
      * Specifies how the Deadline object type must be represented by a String.
-     *
      * @return String type representation of the Deadline object.
      */
     @Override
