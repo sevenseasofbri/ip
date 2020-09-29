@@ -1,5 +1,23 @@
 # User Guide
 
+## Requirements
+Ensure you have Java **11** or higher installed on your computer.
+
+## Quick Start
+* Download the duke.jar file from the releases.
+* Copy the file to a folder where you would want to store the task list data.
+* Double click jar file to start the application. If this does not open the app
+then open the terminal and make sure you are in the folder with the jar file. Type
+the following command: `java -jar duke.jar`
+* Once the app starts, type a command in the command line and press _enter_ to execute it.
+* Some example commands (does not cover all commands):
+  1. `list`: list all contacts
+  2. `todo Buy groceries.`: Adds a task with `Buy groceries.` as description.
+  3. `done 1`: Marks 1st task in the list as done.
+  4. `delete 2`: Deletes the 2nd task in the list.
+  5. `bye`: Exits the app
+* The features section below has details of all commands.
+ 
 ## Features 
 
 ### Add a to-do task: `todo`
@@ -165,3 +183,15 @@ ____________________________________________________________
 Task data is saved automatically in the hard disk for each change in the data.
 There is no need to save data manually. This data is loaded the next time the 
 application is opened.
+
+## Command Summary
+Command | Format | Example
+------------ | ------------- | -------------
+todo | `todo <description>` | `todo Read book.` 
+deadline | `deadline <description> /by <yyyy-mm-dd>` | `deadline Finish exam revision. /by 2020-10-10`
+event | `event <description> /at <yyyy-mm-dd>` | `event CS2113T Final Exam. /at 2020-12-01`
+list | `list` | `list`
+done | `done <task number>` | `done 2`
+delete | `delete <task number>` | `delete 1`
+find | `find <keyword>` | `find exam`
+bye | `bye` | `bye`
