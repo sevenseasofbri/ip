@@ -14,7 +14,6 @@ public class Duke {
         TODO , DEADLINE, EVENT, INVALID
     }
 
-    //public static Storage file = new Storage("duke.txt", "data" );
 
     public Duke(String fileName, String dir){
         ui = new Ui();

@@ -67,8 +67,8 @@ public class Ui {
     public void printFormatError() {
         printMessage("\t☹ Remember to format your command like this ⬇" +
                     "\n\t todo <description>"+
-                    "\n\t deadline <description> /by <date/time>"+
-                    "\n\t event <description> /at <date/time>");
+                    "\n\t deadline <description> /by <yyyy-mm-dd>"+
+                    "\n\t event <description> /at <yyyy-mm-dd>");
     }
 
     public void printRemovedTask(int valueToDelete, ArrayList<Task> tasks) {
