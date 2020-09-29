@@ -186,21 +186,12 @@ application is opened.
 
 ## Command Summary
 Command | Format | Example
-
------------- | ------------- | -------------
-
+:------------: | :-------------: | :-------------:
 todo | `todo <description>` | `todo Read book.` 
-
 deadline | `deadline <description> /by <yyyy-mm-dd>` | `deadline Finish exam revision. /by 2020-10-10`
-
 event | `event <description> /at <yyyy-mm-dd>` | `event CS2113T Final Exam. /at 2020-12-01`
-
 list | `list` | `list`
-
 done | `done <task number>` | `done 2`
-
 delete | `delete <task number>` | `delete 1`
-
 find | `find <keyword>` | `find exam`
-
 bye | `bye` | `bye`
