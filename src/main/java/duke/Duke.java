@@ -2,6 +2,8 @@ package duke;
 
 import duke.exception.DukeException;
 import duke.exception.DukeOutOfBoundsException;
+import duke.exception.FindFormatException;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.IOException;
@@ -18,6 +20,7 @@ public class Duke {
     public enum TaskType{
         TODO , DEADLINE, EVENT, INVALID
     }
+
 
     /**
      * Creates new instances of Ui and Storage classes to enable user interface and access task data from files
@@ -63,6 +66,8 @@ public class Duke {
                 ui.printInvalidNumberError();
             }catch (DukeOutOfBoundsException e){
                 ui.printRangeError();
+            }catch (FindFormatException e){
+                ui.printFindFormatError();
             }
         }
         updateFileTasks();

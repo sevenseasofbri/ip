@@ -15,6 +15,8 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     public static final String LINE_BREAK = "\t____________________________________________________________";
     public static final String YOUR_LIST = "\t_______________________~Your List~__________________________";
+    public static final String TASKS_FOUND="\t______________________~Tasks Found~_________________________";
+
 
     /**
      * Prints the message passed in the format which Duke responds with.
@@ -49,12 +51,13 @@ public class Ui {
         printMessage("\tSomething went wrong while loading file: "+ e.getMessage());
     }
 
+
     /**
      * Prints the ArrayList<Task> passed to it in a manner specific to Duke.
      * @param tasks An ArrayList<Task> to be printed.
      */
-    public void printList(ArrayList<Task> tasks){
-        System.out.println(YOUR_LIST);
+    public void printList(ArrayList<Task> tasks, boolean isForFind){
+        System.out.println(isForFind? TASKS_FOUND: YOUR_LIST);
         int index =0;
         for(Task task: tasks){
             System.out.println("\t"+(index+1)+". "+ task);
@@ -116,8 +119,8 @@ public class Ui {
     public void printFormatError() {
         printMessage("\t☹ Remember to format your command like this ⬇" +
                     "\n\t todo <description>"+
-                    "\n\t deadline <description> /by <date/time>"+
-                    "\n\t event <description> /at <date/time>");
+                    "\n\t deadline <description> /by <yyyy-mm-dd>"+
+                    "\n\t event <description> /at <yyyy-mm-dd>");
     }
 
     /**
@@ -153,5 +156,9 @@ public class Ui {
     public void printAddedTask(ArrayList<Task> tasks) {
         printMessage("\tAdded:" + tasks.get(tasks.size()-1) +
                         "\n\tNow you have "+ tasks.size()+(tasks.size()!=1?" tasks":" task")+" in the list :D");
+    }
+
+    public void printFindFormatError() {
+        printMessage("\t☹ Please remember to specify a keyword to search for!");
     }
 }

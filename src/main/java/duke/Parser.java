@@ -1,9 +1,9 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.exception.DukeOutOfBoundsException;
-import duke.exception.EmptyTaskException;
-import duke.exception.InvalidFormatException;
+import duke.exception.*;
+
+import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents the functions and attributes of a user response parser. Has functions to read and identify commands
@@ -35,19 +35,22 @@ public class Parser {
      * @throws DukeException If command type is INVALID.
      * @throws DukeOutOfBoundsException If an out of range number is specified to mark as done/ delete from the list.
      */
-    boolean parseCommand(String answer) throws DukeException, DukeOutOfBoundsException {
+    boolean parseCommand(String answer) throws DukeException, DukeOutOfBoundsException, FindFormatException {
         if(answer.trim().equalsIgnoreCase("bye")){
             return false;
         }
         if(answer.trim().equalsIgnoreCase("list")){
-            ui.printList(taskList.tasks);
+            ui.printList(taskList.tasks, false);
             return true;
         }
         if(answer.trim().matches("done(.*)")){
             taskList.markTaskAsDone(answer);
         }else if(answer.trim().matches("delete(.*)")){
             taskList.deleteTask(answer);
-        } else {
+        }else if(answer.trim().matches("find(.*)")){
+            taskList.findTasksWithKeyword(answer);
+        }
+        else {
             Duke.TaskType taskType = getTaskType(answer);
             if(taskType == Duke.TaskType.INVALID){
                 throw new DukeException();
@@ -58,7 +61,7 @@ public class Parser {
                 ui.printEmptyDescriptionError(taskType);
             }catch(StringIndexOutOfBoundsException e){
                 ui.printOutOfBoundError();
-            }catch (InvalidFormatException e){
+            } catch (InvalidFormatException | DateTimeException e){
                 ui.printFormatError();
             }
         }
