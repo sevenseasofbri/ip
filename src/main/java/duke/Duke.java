@@ -2,6 +2,8 @@ package duke;
 
 import duke.exception.DukeException;
 import duke.exception.DukeOutOfBoundsException;
+import duke.exception.FindFormatException;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.IOException;
@@ -45,6 +47,8 @@ public class Duke {
                 ui.printInvalidNumberError();
             }catch (DukeOutOfBoundsException e){
                 ui.printRangeError();
+            }catch (FindFormatException e){
+                ui.printFindFormatError();
             }
         }
         updateFileTasks();
