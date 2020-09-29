@@ -16,7 +16,7 @@ the following command: `java -jar duke.jar`
   3. `done 1`: Marks 1st task in the list as done.
   4. `delete 2`: Deletes the 2nd task in the list.
   5. `bye`: Exits the app
-* The features section below has details of all commands.
+* The features section below has details of **all** commands.
  
 ## Features 
 
