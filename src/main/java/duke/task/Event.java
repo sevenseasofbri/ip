@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Represents a kind of task which is an Event 'at' when it occurs.
  */
-public class Event extends Task{
+public class Event extends Task {
     public String at;
 
     /**
@@ -11,7 +11,7 @@ public class Event extends Task{
      * @param description String type describing the task.
      * @param at String type specifying time/date at when the task occurs.
      */
-    public Event(String description, String at){
+    public Event(String description, String at) {
         super(description);
         this.at = at;
     }

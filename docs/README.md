@@ -1,14 +1,29 @@
 # User Guide
+- [User Guide](#user-guide)
+  * [Requirements](#requirements)
+  * [Quick Start](#quick-start)
+  * [Features](#features)
+    + [Add a to-do task: `todo`](#add-a-to-do-task---todo-)
+    + [Add a deadline: `deadline`](#add-a-deadline---deadline-)
+    + [Add an event: `event`](#add-an-event---event-)
+    + [List all tasks: `list`](#list-all-tasks---list-)
+    + [Mark a task as done: `done`](#mark-a-task-as-done---done-)
+    + [Delete a task: `delete`](#delete-a-task---delete-)
+    + [Locate a task by a keyword: `find`](#locate-a-task-by-a-keyword---find-)
+    + [Exit the application: `bye`](#exit-the-application---bye-)
+    + [Saving the data](#saving-the-data)
+  * [Command Summary](#command-summary)
 
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 ## Requirements
 Ensure you have Java **11** or higher installed on your computer.
 
 ## Quick Start
-* Download the duke.jar file from the releases.
+* Download the ip.jar file from the releases.
 * Copy the file to a folder where you would want to store the task list data.
 * Double click jar file to start the application. If this does not open the app
 then open the terminal and make sure you are in the folder with the jar file. Type
-the following command: `java -jar duke.jar`
+the following command: `java -jar ip.jar`
 * Once the app starts, type a command in the command line and press _enter_ to execute it.
 * Some example commands (does not cover all commands):
   1. `list`: list all contacts

@@ -17,7 +17,7 @@ public class Duke {
     private static Storage storage;
     private static Ui ui;
     public static TaskList taskList;
-    public enum TaskType{
+    public enum TaskType {
         TODO , DEADLINE, EVENT, INVALID
     }
 
@@ -30,10 +30,10 @@ public class Duke {
      * @param fileName The name and extension of the file where task data will be stored.
      * @param dir The folder in which the task data file will be located.
      */
-    public Duke(String fileName, String dir){
+    public Duke(String fileName, String dir) {
         ui = new Ui();
         storage = new Storage(fileName, dir);
-        try{
+        try {
             taskList = new TaskList(storage.readFile());
         }catch(FileNotFoundException e){
             ui.printMessage("\t☹ Could not load the previous data! Because "+e.getMessage());
@@ -57,15 +57,15 @@ public class Duke {
             answer = in.nextLine();
             try {
                 isNotDone = parse.parseCommand(answer);
-            }catch (DukeException e){
+            }catch (DukeException e) {
                 ui.printDukeExceptionError();
-            }catch (ArrayIndexOutOfBoundsException e){
+            }catch (ArrayIndexOutOfBoundsException e) {
                 ui.printEmptyCommandError();
-            }catch (NumberFormatException e){
+            }catch (NumberFormatException e) {
                 ui.printInvalidNumberError();
-            }catch (DukeOutOfBoundsException e){
+            }catch (DukeOutOfBoundsException e) {
                 ui.printRangeError();
-            }catch (FindFormatException e){
+            }catch (FindFormatException e) {
                 ui.printFindFormatError();
             }
         }

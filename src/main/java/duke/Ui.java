@@ -33,7 +33,7 @@ public class Ui {
      * Prints the welcome message.
      */
     public void printWelcome(){
-        printMessage("\tHello! I'm\n"+ Ui.LOGO+"\n\tWhat can I do for you?\uD83D\uDE0A");
+        printMessage("\tHello! I'm\n" + Ui.LOGO + "\n\tWhat can I do for you?\uD83D\uDE0A");
     }
 
     /**
@@ -52,17 +52,16 @@ public class Ui {
         printMessage("\tSomething went wrong while loading file: "+ e.getMessage());
     }
 
-
     /**
      * Prints the ArrayList<Task> passed to it in a manner specific to Duke.
      * @param tasks An ArrayList<Task> to be printed.
      * @param isForFind A boolean value that specifies if the print action is for the find command or not.
      */
-    public void printList(ArrayList<Task> tasks, boolean isForFind){
-        System.out.println(isForFind? TASKS_FOUND: YOUR_LIST);
-        int index =0;
-        for(Task task: tasks){
-            System.out.println("\t"+(index+1)+". "+ task);
+    public void printList(ArrayList<Task> tasks, boolean isForFind) {
+        System.out.println(isForFind ? TASKS_FOUND : YOUR_LIST);
+        int index = 0;
+        for(Task task: tasks) {
+            System.out.println("\t" + (index + 1) + ". " + task);
             index++;
         }
         System.out.println(LINE_BREAK);
@@ -119,8 +118,8 @@ public class Ui {
      */
     public void printFormatError() {
         printMessage("\t☹ Remember to format your command like this ⬇" +
-                    "\n\t todo <description>"+
-                    "\n\t deadline <description> /by <yyyy-mm-dd>"+
+                    "\n\t todo <description>" +
+                    "\n\t deadline <description> /by <yyyy-mm-dd>" +
                     "\n\t event <description> /at <yyyy-mm-dd>");
     }
 
@@ -131,8 +130,8 @@ public class Ui {
      */
     public void printRemovedTask(int valueToDelete, ArrayList<Task> tasks) {
         printMessage("\tNoted! I've removed this task: \n\t" +
-                    tasks.get(valueToDelete -1)+
-                    "\n\tNow you have " +(tasks.size()-1)+(tasks.size()-1!=1?" tasks":" task")+" in the list :D");
+                    tasks.get(valueToDelete - 1)+
+                    "\n\tNow you have " +(tasks.size() - 1)+(tasks.size() - 1 != 1?" tasks":" task")+" in the list :D");
     }
 
     /**
@@ -143,7 +142,7 @@ public class Ui {
      */
     public void printMarkedAsDone(int valueToMarkDone, ArrayList<Task> tasks, int totalTasksDone) {
         printMessage("\tAwesome! I've marked this task as done:"+"\n\t" +
-                      tasks.get(valueToMarkDone -1)+
+                      tasks.get(valueToMarkDone - 1)+
                       "\n\tOnly " + (tasks.size() - totalTasksDone) + " to go! ;)");
     }
 
@@ -152,8 +151,8 @@ public class Ui {
      * @param tasks An ArrayList<Task> specifying the users current saved tasks.
      */
     public void printAddedTask(ArrayList<Task> tasks) {
-        printMessage("\tAdded:" + tasks.get(tasks.size()-1) +
-                        "\n\tNow you have "+ tasks.size()+(tasks.size()!=1?" tasks":" task")+" in the list :D");
+        printMessage("\tAdded:" + tasks.get(tasks.size() - 1) +
+                        "\n\tNow you have "+ tasks.size()+(tasks.size() != 1?" tasks" : " task") + " in the list :D");
     }
 
     /**

@@ -18,7 +18,7 @@ public class Parser {
      *  creating a new object of Param. Also initialises the object of Ui to use for user interactions.
      * @param duke The new instance of the Duke class to store current updated taskList.
      */
-    public Parser(Duke duke){
+    public Parser(Duke duke) {
         ui = new Ui();
         taskList = duke.taskList;
     }
@@ -56,11 +56,11 @@ public class Parser {
             }
             try {
                 taskList.addToList(answer, taskType);
-            }catch(EmptyTaskException e){
+            }catch(EmptyTaskException e) {
                 ui.printEmptyDescriptionError(taskType);
-            }catch(StringIndexOutOfBoundsException e){
+            }catch(StringIndexOutOfBoundsException e) {
                 ui.printOutOfBoundError();
-            } catch (InvalidFormatException | DateTimeException e){
+            } catch (InvalidFormatException | DateTimeException e) {
                 ui.printFormatError();
             }
         }

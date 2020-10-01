@@ -24,7 +24,7 @@ public class Storage {
      * @param name The name and extension type of the file where the task data will be stored.
      * @param dir The name of the folder in which the file with task data will be stored.
      */
-    public Storage(String name, String dir){
+    public Storage(String name, String dir) {
         fileName = name;
         directory = dir;
         createFile();
@@ -35,16 +35,16 @@ public class Storage {
      * object of the class is made. Checks for existence of the file and folder before making them. Catches
      * IOException in case something goes wrong while making the file and directory.
      */
-    public void createFile(){
+    public void createFile() {
         file = new File(directory+"/"+fileName);
         try{
-            if(!file.exists()){
-                if(!file.getParentFile().exists()){
+            if(!file.exists()) {
+                if(!file.getParentFile().exists()) {
                     file.getParentFile().mkdirs();
                 }
                 file.createNewFile();
             }
-        }catch(IOException e){
+        }catch(IOException e) {
             System.out.println("\tSomething went wrong: "+ e.getMessage());
         }
     }
@@ -55,23 +55,23 @@ public class Storage {
      * @param tasks An ArrayList<Task> which specifies the current tasks to be written to the file.
      * @throws IOException If the output operation to the file has failed or was interrupted.
      */
-    public void updateFile(ArrayList<Task> tasks) throws IOException{
+    public void updateFile(ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(file);
         String taskType;
         String done;
         String textIn="";
-        for(Task task: tasks){
+        for(Task task: tasks) {
             taskType = getTaskType(task);
             done = getDoneStatus(task);
-            switch (taskType){
+            switch (taskType) {
             case "T":
-                textIn = textIn+ (taskType+" | "+done+" | "+task.getDescription()+System.lineSeparator());
+                textIn = textIn + (taskType + " | "+done+" | "+task.getDescription() + System.lineSeparator());
                 break;
             case "D":
-                textIn = textIn + (taskType+" | "+done+" | "+task.getDescription()+" | "+((Deadline) task).getBy()+System.lineSeparator());
+                textIn = textIn + (taskType + " | "+done+" | "+task.getDescription() + " | " + ((Deadline) task).getBy() + System.lineSeparator());
                 break;
             case "E":
-                textIn = textIn + (taskType+" | "+done+" | "+task.getDescription()+" | "+((Event) task).getAt()+System.lineSeparator());
+                textIn = textIn + (taskType + " | "+done+" | "+task.getDescription() + " | " + ((Event) task).getAt() + System.lineSeparator());
             }
         }
         fw.write(textIn);
@@ -83,12 +83,12 @@ public class Storage {
      * @param task A Task class object which could be an object of subclass Deadline, Event or ToDo.
      * @return A String "T", "D" or "E" if the task is and instance of ToDo, Deadline or Event respectively.
      */
-    public String getTaskType(Task task){
-        if(task instanceof ToDo){
+    public String getTaskType(Task task) {
+        if(task instanceof ToDo) {
             return "T";
-        }else if(task instanceof Deadline){
+        }else if(task instanceof Deadline) {
             return "D";
-        }else{
+        }else {
             return "E";
         }
     }
@@ -98,10 +98,10 @@ public class Storage {
      * @param task An instance of the Task class.
      * @return A String "0" or "1" if the task is marked as not done or done respectively.
      */
-    public String getDoneStatus(Task task){
-        if(task.getDoneStatus()){
+    public String getDoneStatus(Task task) {
+        if(task.getDoneStatus()) {
             return "1";
-        }else{
+        }else {
             return "0";
         }
     }
