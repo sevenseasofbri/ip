@@ -3,18 +3,19 @@
   * [Requirements](#requirements)
   * [Quick Start](#quick-start)
   * [Features](#features)
-    + [Print command summary: `help`](#print-command-summary-help)
-    + [Add a to-do task: `todo`](#add-a-to-do-task-todo)
-    + [Add a deadline: `deadline`](#add-a-deadline-deadline)
-    + [Add an event: `event`](#add-an-event-event)
-    + [List all tasks: `list`](#list-all-tasks-list)
-    + [Mark a task as done: `done`](#mark-a-task-as-done-done)
-    + [Delete a task: `delete`](#delete-a-task-delete)
-    + [Locate a task by a keyword: `find`](#locate-a-task-by-a-keyword-find)
-    + [Exit the application: `bye`](#exit-the-application-bye)
+    + [Print command summary: `help`](#print-command-summary---help-)
+    + [Add a to-do task: `todo`](#add-a-to-do-task---todo-)
+    + [Add a deadline: `deadline`](#add-a-deadline---deadline-)
+    + [Add an event: `event`](#add-an-event---event-)
+    + [List all tasks: `list`](#list-all-tasks---list-)
+    + [Mark a task as done: `done`](#mark-a-task-as-done---done-)
+    + [Delete a task: `delete`](#delete-a-task---delete-)
+    + [Locate a task by a keyword: `find`](#locate-a-task-by-a-keyword---find-)
+    + [Exit the application: `bye`](#exit-the-application---bye-)
     + [Saving the data](#saving-the-data)
   * [Command Summary](#command-summary)
 
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 ## Requirements
 Ensure you have Java **11** or higher installed on your computer.
 
