@@ -3,6 +3,7 @@
   * [Requirements](#requirements)
   * [Quick Start](#quick-start)
   * [Features](#features)
+    + [Print command summary: `help`](#print-command-summary---help-)
     + [Add a to-do task: `todo`](#add-a-to-do-task---todo-)
     + [Add a deadline: `deadline`](#add-a-deadline---deadline-)
     + [Add an event: `event`](#add-an-event---event-)
@@ -14,7 +15,6 @@
     + [Saving the data](#saving-the-data)
   * [Command Summary](#command-summary)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 ## Requirements
 Ensure you have Java **11** or higher installed on your computer.
 
@@ -26,14 +26,44 @@ then open the terminal and make sure you are in the folder with the jar file. Ty
 the following command: `java -jar ip.jar`
 * Once the app starts, type a command in the command line and press _enter_ to execute it.
 * Some example commands (does not cover all commands):
-  1. `list`: list all contacts
-  2. `todo Buy groceries.`: Adds a task with `Buy groceries.` as description.
-  3. `done 1`: Marks 1st task in the list as done.
-  4. `delete 2`: Deletes the 2nd task in the list.
-  5. `bye`: Exits the app
+  1. `list`: List all contacts
+  2. `help`: Display command summary.
+  3. `todo Buy groceries.`: Adds a task with `Buy groceries.` as description.
+  4. `done 1`: Marks 1st task in the list as done.
+  5. `delete 2`: Deletes the 2nd task in the list.
+  6. `bye`: Exits the app
 * The features section below has details of **all** commands.
  
 ## Features 
+
+### Print command summary: `help`
+Prints list of commands and their respective formats.
+
+#### Usage
+
+#### `help`
+A list of available commands are printed out.
+
+Example of usage:
+
+`help`
+
+Expected outcome:
+```
+____________________________________________________________
+Here's a command summary to help you out! You may also refer to sevenseasofbri.github.io/ip for the User Guide ;)
+COMMAND SUMMARY
+Note: Text in "<>" are parameters to be specified by you!
+1. Add a to-do task: todo <description>
+2. Add a deadline: deadline <description> /by <yyyy-mm-dd>
+3. Add an event: event <description> /at <yyyy-mm-dd>
+4. List all tasks: list
+5. Mark a task as done: done <task number>
+6. Delete a task: delete <task number>
+7. Locate a task by a keyword: find <keyword>
+8. Exit the application: bye
+____________________________________________________________
+```
 
 ### Add a to-do task: `todo`
 Adds a simple to-do task to the task list.

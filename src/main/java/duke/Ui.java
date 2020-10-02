@@ -33,7 +33,8 @@ public class Ui {
      * Prints the welcome message.
      */
     public void printWelcome(){
-        printMessage("\tHello! I'm\n" + Ui.LOGO + "\n\tWhat can I do for you?\uD83D\uDE0A");
+        printMessage("\tHello! I'm\n" + Ui.LOGO + "\n\tWhat can I do for you?\uD83D\uDE0A\n"+
+                    "\tTo better understand my capabilities, type 'help' and then press enter ✨");
     }
 
     /**
@@ -152,7 +153,7 @@ public class Ui {
      */
     public void printAddedTask(ArrayList<Task> tasks) {
         printMessage("\tAdded:" + tasks.get(tasks.size() - 1) +
-                        "\n\tNow you have "+ tasks.size()+(tasks.size() != 1?" tasks" : " task") + " in the list :D");
+                    "\n\tNow you have "+ tasks.size()+(tasks.size() != 1?" tasks" : " task") + " in the list :D");
     }
 
     /**
@@ -160,5 +161,25 @@ public class Ui {
      */
     public void printFindFormatError() {
         printMessage("\t☹ Please remember to specify a keyword to search for!");
+    }
+
+    /**
+     * Prints out a command summary.
+     */
+    public void printHelp() {
+        System.out.println(LINE_BREAK);
+        System.out.println("\tHere's a command summary to help you out! You may also refer to " +
+                            "sevenseasofbri.github.io/ip for the User Guide ;)");
+        System.out.println("\tCOMMAND SUMMARY\n" +
+                            "\tNote: Text in \"<>\" are parameters to be specified by you!\n" +
+                            "\t1. Add a to-do task: todo <description>\n" +
+                            "\t2. Add a deadline: deadline <description> /by <yyyy-mm-dd>\n" +
+                            "\t3. Add an event: event <description> /at <yyyy-mm-dd>\n" +
+                            "\t4. List all tasks: list\n" +
+                            "\t5. Mark a task as done: done <task number>\n" +
+                            "\t6. Delete a task: delete <task number>\n" +
+                            "\t7. Locate a task by a keyword: find <keyword>\n" +
+                            "\t8. Exit the application: bye");
+        System.out.println(LINE_BREAK);
     }
 }

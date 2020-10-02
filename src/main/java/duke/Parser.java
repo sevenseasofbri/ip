@@ -48,8 +48,9 @@ public class Parser {
             taskList.deleteTask(answer);
         }else if(answer.trim().matches("find(.*)")){
             taskList.findTasksWithKeyword(answer);
-        }
-        else {
+        }else if(answer.trim().matches("help(.*)")){
+            ui.printHelp();
+        } else {
             Duke.TaskType taskType = getTaskType(answer);
             if(taskType == Duke.TaskType.INVALID){
                 throw new DukeException();
